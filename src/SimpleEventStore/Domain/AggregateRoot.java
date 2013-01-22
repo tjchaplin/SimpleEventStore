@@ -19,6 +19,9 @@ public abstract class AggregateRoot {
     public int Id;
     public int Version;
 
+    protected AggregateRoot() {
+    }
+
     public int getId() {
         return Id;
     }
@@ -53,7 +56,7 @@ public abstract class AggregateRoot {
         ApplyChange(event, true);
     }
 
-    abstract  <T extends Event> void Apply(T event);
+    abstract void Apply(Event event);
 
 
     private void ApplyChange(Event event,boolean isNew)

@@ -15,6 +15,9 @@ public class InventoryItem extends AggregateRoot {
 
     private boolean  activated;
 
+    public InventoryItem() {
+    }
+
     public InventoryItem(int id,String name) {
         ApplyChange(new InventoryItemCreated(id,name));
     }
@@ -29,13 +32,14 @@ public class InventoryItem extends AggregateRoot {
         activated = false;
     }
 
-    //TODO: Remove this is not needed
     @Override
-    <T extends Event> void Apply(T event) {
+    void Apply(Event event) {
         if (event instanceof InventoryItemCreated)
             Apply((InventoryItemCreated)event);
 
         if (event instanceof InventoryItemDeactivated)
             Apply((InventoryItemDeactivated)event);
+
+        throw new IllegalArgumentException("UnknownEvent Type:"+event);
     }
 }
