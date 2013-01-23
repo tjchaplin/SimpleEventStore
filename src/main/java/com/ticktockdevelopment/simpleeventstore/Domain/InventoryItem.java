@@ -23,24 +23,33 @@ public class InventoryItem extends AggregateRoot {
         ApplyChange(new InventoryItemCreated(id,name));
     }
 
-    void Apply(InventoryItemCreated event) {
+    private void Apply(InventoryItemCreated event) {
         Id = event.Id;
         activated = true;
     }
 
-    void Apply(InventoryItemDeactivated event) {
+    private void Apply(InventoryItemDeactivated event) {
         Id = event.Id;
         activated = false;
     }
 
     @Override
-    void Apply(Event event) {
+    protected void Apply(Event event) {
         if (event instanceof InventoryItemCreated)
+        {
             Apply((InventoryItemCreated)event);
-
-        if (event instanceof InventoryItemDeactivated)
+        }
+        else if (event instanceof InventoryItemDeactivated)
+        {
             Apply((InventoryItemDeactivated)event);
+        }
+        else
+        {
+            throw new IllegalArgumentException("UnknownEvent Type:"+event);
+        }
+    }
 
-        throw new IllegalArgumentException("UnknownEvent Type:"+event);
+    public boolean isActivated() {
+        return activated;
     }
 }
