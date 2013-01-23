@@ -1,4 +1,4 @@
-package SimpleEventStore.Core;
+package com.ticktockdevelopment.simpleeventstore.Core;
 /**
  * Created with IntelliJ IDEA.
  * User: tchaplin

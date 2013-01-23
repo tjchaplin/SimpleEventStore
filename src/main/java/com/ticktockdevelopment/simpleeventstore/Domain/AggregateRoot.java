@@ -1,6 +1,6 @@
-package SimpleEventStore.Domain;
+package com.ticktockdevelopment.simpleeventstore.Domain;
 
-import SimpleEventStore.Core.Event;
+import com.ticktockdevelopment.simpleeventstore.Core.Event;
 
 import java.util.ArrayList;
 import java.util.List;

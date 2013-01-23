@@ -1,4 +1,4 @@
-package SimpleEventStore.Core;
+package com.ticktockdevelopment.simpleeventstore.Core;
 
 import java.util.List;
 

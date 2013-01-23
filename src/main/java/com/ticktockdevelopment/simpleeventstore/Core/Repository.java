@@ -1,8 +1,7 @@
-package SimpleEventStore.Core;
+package com.ticktockdevelopment.simpleeventstore.Core;
 
-import SimpleEventStore.Domain.AggregateRoot;
-import SimpleEventStore.Domain.InventoryItem;
-import SimpleEventStore.Infrastructure.IRepository;
+import com.ticktockdevelopment.simpleeventstore.Domain.AggregateRoot;
+import com.ticktockdevelopment.simpleeventstore.Infrastructure.IRepository;
 
 import java.util.List;
 
@@ -27,9 +26,8 @@ public class Repository implements IRepository {
     }
 
     @Override
-    public <T extends AggregateRoot> T GetById(int id) {
-        T newAggregateRoot = null;
-        newAggregateRoot = create(newAggregateRoot);
+    public <T extends AggregateRoot> T GetById(Class<T> type, int id) {
+        T newAggregateRoot = create(type);
         List<Event> historicEvents = eventStore.GetEventsForAggregate(id);
         newAggregateRoot.LoadsFromHistory(historicEvents);
         return newAggregateRoot;
@@ -37,12 +35,17 @@ public class Repository implements IRepository {
 
 
     //TODO: This breaks SRP+More and needs to be reworked
-    private static  <T extends AggregateRoot> T create(T aggregateRoot) {
-        if (aggregateRoot instanceof InventoryItem)
-            return  (T) new InventoryItem();
+    private static  <T extends AggregateRoot> T create(Class<T> type) {
+
+        try {
+            return type.newInstance();
+        } catch (InstantiationException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
 
         return null;
     }
-
-
 }

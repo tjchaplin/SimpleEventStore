@@ -1,6 +1,6 @@
-package SimpleEventStore.Events;
+package com.ticktockdevelopment.simpleeventstore.Events;
 
-import SimpleEventStore.Core.Event;
+import com.ticktockdevelopment.simpleeventstore.Core.Event;
 
 public class InventoryItemDeactivated extends Event {
     public int Id;

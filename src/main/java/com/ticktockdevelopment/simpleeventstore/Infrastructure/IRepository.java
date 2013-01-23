@@ -1,8 +1,6 @@
-package SimpleEventStore.Infrastructure;
+package com.ticktockdevelopment.simpleeventstore.Infrastructure;
 
-import SimpleEventStore.Domain.AggregateRoot;
-
-import java.util.UUID;
+import com.ticktockdevelopment.simpleeventstore.Domain.AggregateRoot;
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,5 +13,5 @@ public interface IRepository {
 
     void Save(AggregateRoot aggregateRoot, int expectedVersion);
 
-    <T extends AggregateRoot> T GetById(int id);
+    <T extends AggregateRoot> T GetById(Class<T> type, int id);
 }

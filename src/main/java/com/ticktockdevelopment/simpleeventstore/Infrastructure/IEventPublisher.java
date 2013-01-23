@@ -1,4 +1,4 @@
-package SimpleEventStore.Infrastructure;
+package com.ticktockdevelopment.simpleeventstore.Infrastructure;
 
 /**
  * Created with IntelliJ IDEA.
@@ -7,6 +7,6 @@ package SimpleEventStore.Infrastructure;
  * Time: 10:28 PM
  * To change this template use File | Settings | File Templates.
  */
-public interface Handles<T> {
-    void Handle(T message);
+public interface IEventPublisher<T> {
+    void Publish(T event);
 }
