@@ -8,4 +8,5 @@ package com.ticktockdevelopment.simpleeventstore.Core;
  */
 public class Event implements Message {
     public int Version;
+
 }
