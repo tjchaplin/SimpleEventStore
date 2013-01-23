@@ -1,12 +1,13 @@
 package com.ticktockdevelopment.simpleeventstore.Core;
 
-import com.ticktockdevelopment.simpleeventstore.Domain.InventoryItem;
+import com.ticktockdevelopment.simpleeventstore.Domain.AggregateRootTest;
 import junit.framework.Assert;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.mockito.Mockito.mock;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -32,14 +33,28 @@ public class RepositoryTest {
     }
 
     @Test
-    public void testSave() throws Exception {
-
+    public void When_Saving_Saving_Event_Should_Store_In_Event_Store() throws Exception {
+        int testAggregateRootId = 1;
+        AggregateRootTest aggregateRootTest = new AggregateRootTest();
+        repository.Save(aggregateRootTest,testAggregateRootId);
+        verify(eventStore).SaveEvents(anyInt(),anyList(),anyInt());
     }
 
     @Test
-    public void When_Getting_Aggregrate_Root_By_Id_Should_Not_Be_Null_If_It_Exists() throws Exception {
-        InventoryItem inventoryItem =repository.GetById(InventoryItem.class,1);
-        Assert.assertTrue(inventoryItem != null);
+    public void When_Getting_Aggregrate_Root_By_Id_Should_Not_Be_Null() throws Exception {
+        AggregateRootTest aggregateRootTest =repository.GetById(AggregateRootTest.class,1);
+        Assert.assertTrue(aggregateRootTest != null);
+    }
 
+    @Test
+    public void When_Getting_Aggregrate_Root_By_Id_Should_Get_Events_From_Event_Store() throws Exception {
+        repository.GetById(AggregateRootTest.class,1);
+        verify(eventStore).GetEventsForAggregate(anyInt());
+    }
+
+    @Test
+    public void When_Getting_Aggregrate_Root_By_Id_Should_Get_Populate_Events_Into_Aggregate() throws Exception {
+        AggregateRootTest aggregateRootTest = repository.GetById(AggregateRootTest.class,1);
+        Assert.assertTrue(aggregateRootTest.didLoadFromHistory);
     }
 }

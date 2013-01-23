@@ -33,18 +33,13 @@ public class Repository implements IRepository {
         return newAggregateRoot;
     }
 
-
-    //TODO: This breaks SRP+More and needs to be reworked
     private static  <T extends AggregateRoot> T create(Class<T> type) {
 
         try {
             return type.newInstance();
-        } catch (InstantiationException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
 
         return null;
     }
