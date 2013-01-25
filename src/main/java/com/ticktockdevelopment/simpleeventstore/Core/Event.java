@@ -10,3 +10,4 @@ public class Event implements Message {
     public int Version;
 
 }
+

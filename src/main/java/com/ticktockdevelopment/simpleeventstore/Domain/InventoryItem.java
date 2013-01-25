@@ -52,4 +52,12 @@ public class InventoryItem extends AggregateRoot {
     public boolean isActivated() {
         return activated;
     }
+
+    public void Deactivate()
+    {
+        if(isActivated())
+            return;//TODO: Add error
+
+        ApplyChange(new InventoryItemDeactivated(Id));
+    }
 }
