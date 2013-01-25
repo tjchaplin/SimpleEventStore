@@ -1,5 +1,7 @@
 package com.ticktockdevelopment.simpleeventstore.Infrastructure;
 
+import com.ticktockdevelopment.simpleeventstore.Core.Event;
+
 /**
  * Created with IntelliJ IDEA.
  * User: tchaplin
@@ -7,6 +9,6 @@ package com.ticktockdevelopment.simpleeventstore.Infrastructure;
  * Time: 10:28 PM
  * To change this template use File | Settings | File Templates.
  */
-public interface IEventPublisher<T> {
-    void Publish(T event);
+public interface IEventPublisher {
+    <T extends Event> void Publish(T event);
 }

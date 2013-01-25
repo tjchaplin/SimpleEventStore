@@ -7,6 +7,7 @@ package com.ticktockdevelopment.simpleeventstore.Infrastructure;
  * Time: 10:28 PM
  * To change this template use File | Settings | File Templates.
  */
-public interface Handles<T> {
+public interface IHandles<T> {
+    <Y>boolean CanHandle(Y type);
     void Handle(T message);
 }

@@ -1,9 +1,10 @@
 package com.ticktockdevelopment.simpleeventstore.Views;
 
+import com.ticktockdevelopment.simpleeventstore.Core.InMemoryDatabase;
 import com.ticktockdevelopment.simpleeventstore.DAO.InventoryItemDetailsDto;
 import com.ticktockdevelopment.simpleeventstore.Events.InventoryItemCreated;
 import com.ticktockdevelopment.simpleeventstore.Events.InventoryItemDeactivated;
-import com.ticktockdevelopment.simpleeventstore.Infrastructure.Handles;
+import com.ticktockdevelopment.simpleeventstore.Infrastructure.IHandles;
 
 /**
  * Created with IntelliJ IDEA.
@@ -14,16 +15,26 @@ import com.ticktockdevelopment.simpleeventstore.Infrastructure.Handles;
  */
 public class InventoryItemDetailView {
 
-    public static class InventoryItemCreatedHandler implements Handles<InventoryItemCreated>
+    public static class InventoryItemCreatedHandler implements IHandles<InventoryItemCreated>
     {
         @Override
-        public void Handle(InventoryItemCreated message) {
+        public <T> boolean CanHandle(T type) {
+            return type instanceof InventoryItemCreated;
+        }
+
+        @Override
+        public  void Handle(InventoryItemCreated message) {
             InMemoryDatabase.inventoryItemDetails.put(String.valueOf(message.Id),new InventoryItemDetailsDto(message.Id,message.name,0,0));
         }
     }
 
-    public static class InventoryItemDeactivatedHandler implements Handles<InventoryItemDeactivated>
+    public static class InventoryItemDeactivatedHandler implements IHandles<InventoryItemDeactivated>
     {
+        @Override
+        public <T> boolean CanHandle(T type) {
+            return type instanceof InventoryItemDeactivated;
+        }
+
         @Override
         public void Handle(InventoryItemDeactivated message) {
             InMemoryDatabase.inventoryItemDetails.remove(String.valueOf(message.Id));

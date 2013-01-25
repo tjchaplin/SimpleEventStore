@@ -1,5 +1,7 @@
 package com.ticktockdevelopment.simpleeventstore.Infrastructure;
 
+import com.ticktockdevelopment.simpleeventstore.Commands.Command;
+
 /**
  * Created with IntelliJ IDEA.
  * User: tchaplin
@@ -7,6 +9,6 @@ package com.ticktockdevelopment.simpleeventstore.Infrastructure;
  * Time: 10:28 PM
  * To change this template use File | Settings | File Templates.
  */
-public interface ICommandSender<T> {
-    void Send(T command);
+public interface ICommandSender {
+    <T extends Command> void Send(T command);
 }

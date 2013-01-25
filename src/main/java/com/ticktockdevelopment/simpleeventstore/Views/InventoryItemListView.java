@@ -1,9 +1,10 @@
 package com.ticktockdevelopment.simpleeventstore.Views;
 
+import com.ticktockdevelopment.simpleeventstore.Core.InMemoryDatabase;
 import com.ticktockdevelopment.simpleeventstore.DAO.InventoryItemListDto;
 import com.ticktockdevelopment.simpleeventstore.Events.InventoryItemCreated;
 import com.ticktockdevelopment.simpleeventstore.Events.InventoryItemDeactivated;
-import com.ticktockdevelopment.simpleeventstore.Infrastructure.Handles;
+import com.ticktockdevelopment.simpleeventstore.Infrastructure.IHandles;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,12 @@ import java.util.List;
  */
 public class InventoryItemListView{
 
-    public static class InventoryItemCreatedHandler implements Handles<InventoryItemCreated>{
+    public static class InventoryItemCreatedHandler implements IHandles<InventoryItemCreated> {
+
+        @Override
+        public <Y> boolean CanHandle(Y type) {
+            return type instanceof InventoryItemCreated;
+        }
 
         @Override
         public void Handle(InventoryItemCreated message) {
@@ -25,7 +31,12 @@ public class InventoryItemListView{
         }
     }
 
-    public static class InventoryItemDeactivatedHanlder implements Handles<InventoryItemDeactivated>{
+    public static class InventoryItemDeactivatedHanlder implements IHandles<InventoryItemDeactivated> {
+
+        @Override
+        public <Y> boolean CanHandle(Y type) {
+            return type instanceof InventoryItemDeactivated;
+        }
 
         @Override
         public void Handle(InventoryItemDeactivated message) {
