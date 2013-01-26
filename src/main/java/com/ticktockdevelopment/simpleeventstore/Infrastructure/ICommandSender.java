@@ -1,6 +1,6 @@
 package com.ticktockdevelopment.simpleeventstore.Infrastructure;
 
-import com.ticktockdevelopment.simpleeventstore.Commands.Command;
+import com.ticktockdevelopment.simpleeventstore.Messaging.Commands.Command;
 
 /**
  * Created with IntelliJ IDEA.

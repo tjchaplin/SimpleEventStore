@@ -1,9 +1,9 @@
 package com.ticktockdevelopment.simpleeventstore.Views;
 
-import com.ticktockdevelopment.simpleeventstore.Core.InMemoryDatabase;
 import com.ticktockdevelopment.simpleeventstore.DAO.InventoryItemListDto;
-import com.ticktockdevelopment.simpleeventstore.Events.InventoryItemDeactivated;
-import com.ticktockdevelopment.simpleeventstore.Infrastructure.IHandles;
+import com.ticktockdevelopment.simpleeventstore.Infrastructure.IHandler;
+import com.ticktockdevelopment.simpleeventstore.Infrastructure.InMemoryDatabase;
+import com.ticktockdevelopment.simpleeventstore.Messaging.Events.InventoryItemDeactivated;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.List;
  * Time: 9:56 PM
  * To change this template use File | Settings | File Templates.
  */
-public class InventoryItemListViewCommandHandler implements IHandles<InventoryItemDeactivated>{
+public class InventoryItemListViewCommandHandler implements IHandler<InventoryItemDeactivated> {
     @Override
     public <Y> boolean CanHandle(Y type) {
         return type instanceof InventoryItemDeactivated;

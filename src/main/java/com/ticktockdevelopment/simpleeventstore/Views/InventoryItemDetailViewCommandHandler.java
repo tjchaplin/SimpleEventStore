@@ -1,10 +1,10 @@
 package com.ticktockdevelopment.simpleeventstore.Views;
 
-import com.ticktockdevelopment.simpleeventstore.Core.InMemoryDatabase;
-import com.ticktockdevelopment.simpleeventstore.Events.InventoryItemDeactivated;
-import com.ticktockdevelopment.simpleeventstore.Infrastructure.IHandles;
+import com.ticktockdevelopment.simpleeventstore.Infrastructure.IHandler;
+import com.ticktockdevelopment.simpleeventstore.Infrastructure.InMemoryDatabase;
+import com.ticktockdevelopment.simpleeventstore.Messaging.Events.InventoryItemDeactivated;
 
-public class InventoryItemDetailViewCommandHandler implements IHandles<InventoryItemDeactivated>
+public class InventoryItemDetailViewCommandHandler implements IHandler<InventoryItemDeactivated>
 {
     @Override
     public <T> boolean CanHandle(T type) {

@@ -1,4 +1,4 @@
-package com.ticktockdevelopment.simpleeventstore.Core;
+package com.ticktockdevelopment.simpleeventstore.Infrastructure;
 
 import com.ticktockdevelopment.simpleeventstore.DAO.InventoryItemDetailsDto;
 import com.ticktockdevelopment.simpleeventstore.DAO.InventoryItemListDto;

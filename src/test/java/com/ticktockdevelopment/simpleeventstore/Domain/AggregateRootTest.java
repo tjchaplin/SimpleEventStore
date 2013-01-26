@@ -1,6 +1,6 @@
 package com.ticktockdevelopment.simpleeventstore.Domain;
 
-import com.ticktockdevelopment.simpleeventstore.Core.Event;
+import com.ticktockdevelopment.simpleeventstore.Messaging.Events.Event;
 
 import java.util.List;
 

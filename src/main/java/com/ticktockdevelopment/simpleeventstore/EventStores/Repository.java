@@ -1,7 +1,8 @@
-package com.ticktockdevelopment.simpleeventstore.Core;
+package com.ticktockdevelopment.simpleeventstore.EventStores;
 
 import com.ticktockdevelopment.simpleeventstore.Domain.AggregateRoot;
 import com.ticktockdevelopment.simpleeventstore.Infrastructure.IRepository;
+import com.ticktockdevelopment.simpleeventstore.Messaging.Events.Event;
 
 import java.util.List;
 

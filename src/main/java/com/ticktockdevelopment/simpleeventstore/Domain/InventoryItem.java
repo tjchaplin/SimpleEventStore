@@ -1,9 +1,9 @@
 package com.ticktockdevelopment.simpleeventstore.Domain;
 
 
-import com.ticktockdevelopment.simpleeventstore.Core.Event;
-import com.ticktockdevelopment.simpleeventstore.Events.InventoryItemCreated;
-import com.ticktockdevelopment.simpleeventstore.Events.InventoryItemDeactivated;
+import com.ticktockdevelopment.simpleeventstore.Messaging.Events.Event;
+import com.ticktockdevelopment.simpleeventstore.Messaging.Events.InventoryItemCreated;
+import com.ticktockdevelopment.simpleeventstore.Messaging.Events.InventoryItemDeactivated;
 
 /**
  * Created with IntelliJ IDEA.

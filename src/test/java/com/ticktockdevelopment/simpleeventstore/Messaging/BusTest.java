@@ -1,7 +1,8 @@
-package com.ticktockdevelopment.simpleeventstore.Core;
+package com.ticktockdevelopment.simpleeventstore.Messaging;
 
-import com.ticktockdevelopment.simpleeventstore.Commands.Command;
-import com.ticktockdevelopment.simpleeventstore.Infrastructure.IHandles;
+import com.ticktockdevelopment.simpleeventstore.Infrastructure.IHandler;
+import com.ticktockdevelopment.simpleeventstore.Messaging.Commands.Command;
+import com.ticktockdevelopment.simpleeventstore.Messaging.Events.Event;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -22,12 +23,12 @@ import static org.mockito.Mockito.*;
  */
 public class BusTest {
     private Bus bus;
-    private IHandles handler;
+    private IHandler handler;
 
     @Before
     public void setUp() throws Exception {
-        handler = mock(IHandles.class);
-        List<IHandles> handlers = new ArrayList<IHandles>();
+        handler = mock(IHandler.class);
+        List<IHandler> handlers = new ArrayList<IHandler>();
         handlers.add(handler);
         bus = new Bus(handlers);
     }
@@ -39,7 +40,7 @@ public class BusTest {
 
     @Test
     public void When_Registering_Handlers_That_Dont_Exist_Should_Add_Handlers() throws Exception {
-        IHandles unRegisteredHandler = mock(IHandles.class);
+        IHandler unRegisteredHandler = mock(IHandler.class);
 
         bus.RegisterHandler(unRegisteredHandler);
         Assert.assertTrue(bus.handlers.contains(unRegisteredHandler));

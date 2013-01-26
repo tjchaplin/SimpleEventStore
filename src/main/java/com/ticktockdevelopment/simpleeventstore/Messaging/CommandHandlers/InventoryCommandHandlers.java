@@ -1,9 +1,9 @@
-package com.ticktockdevelopment.simpleeventstore.CommandHandlers;
+package com.ticktockdevelopment.simpleeventstore.Messaging.CommandHandlers;
 
 import com.ticktockdevelopment.simpleeventstore.Domain.InventoryItem;
-import com.ticktockdevelopment.simpleeventstore.Events.InventoryItemCreated;
-import com.ticktockdevelopment.simpleeventstore.Events.InventoryItemDeactivated;
 import com.ticktockdevelopment.simpleeventstore.Infrastructure.IRepository;
+import com.ticktockdevelopment.simpleeventstore.Messaging.Events.InventoryItemCreated;
+import com.ticktockdevelopment.simpleeventstore.Messaging.Events.InventoryItemDeactivated;
 
 /**
  * Created with IntelliJ IDEA.

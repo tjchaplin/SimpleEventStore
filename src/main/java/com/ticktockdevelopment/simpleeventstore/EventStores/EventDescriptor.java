@@ -1,4 +1,6 @@
-package com.ticktockdevelopment.simpleeventstore.Core;
+package com.ticktockdevelopment.simpleeventstore.EventStores;
+
+import com.ticktockdevelopment.simpleeventstore.Messaging.Events.Event;
 
 /**
  * Created with IntelliJ IDEA.

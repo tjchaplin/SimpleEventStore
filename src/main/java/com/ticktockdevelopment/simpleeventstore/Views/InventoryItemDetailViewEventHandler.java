@@ -1,11 +1,11 @@
 package com.ticktockdevelopment.simpleeventstore.Views;
 
-import com.ticktockdevelopment.simpleeventstore.Core.InMemoryDatabase;
 import com.ticktockdevelopment.simpleeventstore.DAO.InventoryItemDetailsDto;
-import com.ticktockdevelopment.simpleeventstore.Events.InventoryItemCreated;
-import com.ticktockdevelopment.simpleeventstore.Infrastructure.IHandles;
+import com.ticktockdevelopment.simpleeventstore.Infrastructure.IHandler;
+import com.ticktockdevelopment.simpleeventstore.Infrastructure.InMemoryDatabase;
+import com.ticktockdevelopment.simpleeventstore.Messaging.Events.InventoryItemCreated;
 
-public class InventoryItemDetailViewEventHandler  implements IHandles<InventoryItemCreated>
+public class InventoryItemDetailViewEventHandler  implements IHandler<InventoryItemCreated>
 {
     @Override
     public <T> boolean CanHandle(T type) {

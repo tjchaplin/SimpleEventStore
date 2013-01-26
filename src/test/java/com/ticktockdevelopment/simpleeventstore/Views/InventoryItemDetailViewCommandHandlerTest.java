@@ -1,8 +1,8 @@
 package com.ticktockdevelopment.simpleeventstore.Views;
 
-import com.ticktockdevelopment.simpleeventstore.Core.InMemoryDatabase;
 import com.ticktockdevelopment.simpleeventstore.DAO.InventoryItemDetailsDto;
-import com.ticktockdevelopment.simpleeventstore.Events.InventoryItemDeactivated;
+import com.ticktockdevelopment.simpleeventstore.Infrastructure.InMemoryDatabase;
+import com.ticktockdevelopment.simpleeventstore.Messaging.Events.InventoryItemDeactivated;
 import junit.framework.Assert;
 import org.junit.After;
 import org.junit.Before;

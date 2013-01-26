@@ -1,4 +1,4 @@
-package com.ticktockdevelopment.simpleeventstore.Core;
+package com.ticktockdevelopment.simpleeventstore.EventStores;
 
 import com.ticktockdevelopment.simpleeventstore.Domain.AggregateRootTest;
 import junit.framework.Assert;
