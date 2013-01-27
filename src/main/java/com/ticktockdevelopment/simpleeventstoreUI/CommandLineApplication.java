@@ -6,10 +6,10 @@ import com.ticktockdevelopment.simpleeventstore.EventStores.Repository;
 import com.ticktockdevelopment.simpleeventstore.Infrastructure.IHandler;
 import com.ticktockdevelopment.simpleeventstore.Infrastructure.IRepository;
 import com.ticktockdevelopment.simpleeventstore.Messaging.Bus;
+import com.ticktockdevelopment.simpleeventstore.Messaging.CommandHandlers.CreateInventoryItemCommandHandler;
 import com.ticktockdevelopment.simpleeventstore.Messaging.CommandHandlers.DeactivateInventoryItemCommandHandler;
-import com.ticktockdevelopment.simpleeventstore.Messaging.CommandHandlers.InventoryItemCreatedEventHandler;
-import com.ticktockdevelopment.simpleeventstore.Messaging.Events.InventoryItemCreated;
-import com.ticktockdevelopment.simpleeventstore.Messaging.Events.InventoryItemDeactivated;
+import com.ticktockdevelopment.simpleeventstore.Messaging.Commands.CreateInventoryItem;
+import com.ticktockdevelopment.simpleeventstore.Messaging.Commands.DeactivateInventoryItem;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -49,10 +49,10 @@ public class CommandLineApplication {
             try {
                 String[] commands = bufferedReader.readLine().split(" ");
 
-                if (commands[0].equals("add"))
+                if (commands[0].equals("add") && commands.length == 2)
                     createInventoryItem(commands[1]);
-                if(commands[0].equals("delete"))
-                    deleteInventoryItem(commands[1]);
+                if(commands[0].equals("delete") && commands.length == 3)
+                    deleteInventoryItem(commands[1],commands[2]);
                 else if (commands[0].equals("exit"))
                     break;
                 else
@@ -67,20 +67,20 @@ public class CommandLineApplication {
         }
     }
 
-    private static void deleteInventoryItem(String id) {
-        InventoryItemDeactivated inventoryItemDeactivated = new InventoryItemDeactivated(Integer.parseInt(id));
-        bus.Publish(inventoryItemDeactivated);
+    private static void deleteInventoryItem(String id,String originalVersion) {
+        DeactivateInventoryItem deactivateInventoryItem = new DeactivateInventoryItem(Integer.parseInt(id),Integer.parseInt(originalVersion));
+        bus.Send(deactivateInventoryItem);
     }
 
     private static void createInventoryItem(String item) {
-        InventoryItemCreated inventoryItemCreated = new InventoryItemCreated(nextId,item);
-        bus.Publish(inventoryItemCreated);
+        CreateInventoryItem createInventoryItem = new CreateInventoryItem(nextId,item);
+        bus.Send(createInventoryItem);
         nextId++;
     }
 
     private static void registerHandlers(Bus bus) {
         IRepository repository = new Repository(eventStore);
-        bus.RegisterHandler(new InventoryItemCreatedEventHandler(repository));
+        bus.RegisterHandler(new CreateInventoryItemCommandHandler(repository));
         bus.RegisterHandler(new DeactivateInventoryItemCommandHandler(repository));
 //        bus.RegisterHandler(new InventoryItemDetailViewCommandHandler());
 //        bus.RegisterHandler(new InventoryItemDetailViewEventHandler());
