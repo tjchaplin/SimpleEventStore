@@ -48,8 +48,14 @@ public class EventStore implements IEventStore{
         if(eventDescriptors.isEmpty())
             return expectedVersion == -1;
 
+        if(expectedVersion == -1)
+            return true;
+
         int lastEventVersion = eventDescriptors.get(eventDescriptors.size() - 1).version;
-        return lastEventVersion != expectedVersion && expectedVersion != -1;
+        if(lastEventVersion == expectedVersion)
+            return true;
+
+        return false;
     }
 
     private List<EventDescriptor> EventDescriptorsForAggregate(int aggregateId)

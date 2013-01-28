@@ -55,7 +55,7 @@ public class InventoryItem extends AggregateRoot {
 
     public void Deactivate()
     {
-        if(isActivated())
+        if(!isActivated())
             return;//TODO: Add error
 
         ApplyChange(new InventoryItemDeactivated(Id));
