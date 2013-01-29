@@ -15,4 +15,10 @@ public class InventoryItemListDto {
         Id = id;
         Name = name;
     }
+
+    @Override
+    public String toString() {
+        String detail = "InventoryId:"+Id+" InventoryName:"+Name;
+        return detail;
+    }
 }

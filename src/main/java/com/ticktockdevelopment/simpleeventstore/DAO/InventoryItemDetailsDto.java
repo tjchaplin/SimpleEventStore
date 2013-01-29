@@ -19,4 +19,10 @@ public class InventoryItemDetailsDto {
         CurrentCount = currentCount;
         Version = version;
     }
+
+    @Override
+    public String toString() {
+        String detail = "InventoryId:"+Id+" InventoryName:"+Name+" Version:"+Version+" CurrentCount:"+CurrentCount;
+        return detail;
+    }
 }

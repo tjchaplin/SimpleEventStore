@@ -1,4 +1,4 @@
-package com.ticktockdevelopment.simpleeventstore.Views;
+package com.ticktockdevelopment.simpleeventstore.Views.handlers;
 
 import com.ticktockdevelopment.simpleeventstore.DAO.InventoryItemListDto;
 import com.ticktockdevelopment.simpleeventstore.Infrastructure.IHandler;

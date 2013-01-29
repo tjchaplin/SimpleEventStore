@@ -1,5 +1,7 @@
 package com.ticktockdevelopment.simpleeventstoreUI;
 
+import com.ticktockdevelopment.simpleeventstore.DAO.InventoryItemDetailsDto;
+import com.ticktockdevelopment.simpleeventstore.DAO.InventoryItemListDto;
 import com.ticktockdevelopment.simpleeventstore.EventStores.EventStore;
 import com.ticktockdevelopment.simpleeventstore.EventStores.IEventStore;
 import com.ticktockdevelopment.simpleeventstore.EventStores.Repository;
@@ -10,15 +12,14 @@ import com.ticktockdevelopment.simpleeventstore.Messaging.CommandHandlers.Create
 import com.ticktockdevelopment.simpleeventstore.Messaging.CommandHandlers.DeactivateInventoryItemCommandHandler;
 import com.ticktockdevelopment.simpleeventstore.Messaging.Commands.CreateInventoryItem;
 import com.ticktockdevelopment.simpleeventstore.Messaging.Commands.DeactivateInventoryItem;
-import com.ticktockdevelopment.simpleeventstore.Views.InventoryItemDetailViewInventoryItemCreatedHandler;
-import com.ticktockdevelopment.simpleeventstore.Views.InventoryItemDetailViewInventoryItemDeactivatedHandler;
-import com.ticktockdevelopment.simpleeventstore.Views.InventoryItemListViewInventoryItemCreatedHandler;
-import com.ticktockdevelopment.simpleeventstore.Views.InventoryItemListViewInventoryItemDeactivatedHandler;
+import com.ticktockdevelopment.simpleeventstore.Views.InventoryItemDetailView;
+import com.ticktockdevelopment.simpleeventstore.Views.InventoryItemListView;
+import com.ticktockdevelopment.simpleeventstore.Views.handlers.InventoryItemDetailViewInventoryItemCreatedHandler;
+import com.ticktockdevelopment.simpleeventstore.Views.handlers.InventoryItemDetailViewInventoryItemDeactivatedHandler;
+import com.ticktockdevelopment.simpleeventstore.Views.handlers.InventoryItemListViewInventoryItemCreatedHandler;
+import com.ticktockdevelopment.simpleeventstore.Views.handlers.InventoryItemListViewInventoryItemDeactivatedHandler;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,8 +56,12 @@ public class CommandLineApplication {
 
                 if (commands[0].equals("add") && commands.length == 2)
                     createInventoryItem(commands[1]);
-                if(commands[0].equals("delete") && commands.length == 3)
+                else if(commands[0].equals("delete") && commands.length == 3)
                     deleteInventoryItem(commands[1],commands[2]);
+                else if(commands[0].equals("list") && commands.length == 1)
+                    listInventoryItem();
+                else if(commands[0].equals("listdetail") && commands.length == 1)
+                    listInventoryItemDetail();
                 else if (commands[0].equals("exit"))
                     break;
                 else
@@ -64,6 +69,7 @@ public class CommandLineApplication {
                     OutputStreamWriter outputStreamWriter = new OutputStreamWriter(System.out);
                     String invalidCommandMessage = "Invalid Command\nUsage: [command] [value]\nValid Commands:\nadd ";
                     outputStreamWriter.write(invalidCommandMessage);
+                    outputStreamWriter.flush();
                 }
             } catch (IOException e) {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
@@ -71,6 +77,35 @@ public class CommandLineApplication {
         }
     }
 
+    private static void listInventoryItemDetail() {
+        InventoryItemDetailView detailView = new InventoryItemDetailView();
+        try {
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(System.out));
+            for(InventoryItemDetailsDto details : detailView.GetView())
+            {
+                writer.write(details.toString()+"\n");
+
+            }
+            writer.flush();
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+    }
+
+    private static void listInventoryItem() {
+        InventoryItemListView listView = new InventoryItemListView();
+        try {
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(System.out));
+            for(InventoryItemListDto details : listView.GetView())
+            {
+                writer.write(details.toString()+"\n");
+
+            }
+            writer.flush();
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+    }
     private static void deleteInventoryItem(String id,String originalVersion) {
         DeactivateInventoryItem deactivateInventoryItem = new DeactivateInventoryItem(Integer.parseInt(id),Integer.parseInt(originalVersion));
         bus.Send(deactivateInventoryItem);

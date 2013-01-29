@@ -3,6 +3,7 @@ package com.ticktockdevelopment.simpleeventstore.Views;
 import com.ticktockdevelopment.simpleeventstore.DAO.InventoryItemListDto;
 import com.ticktockdevelopment.simpleeventstore.Infrastructure.InMemoryDatabase;
 import com.ticktockdevelopment.simpleeventstore.Messaging.Events.InventoryItemDeactivated;
+import com.ticktockdevelopment.simpleeventstore.Views.handlers.InventoryItemListViewInventoryItemDeactivatedHandler;
 import junit.framework.Assert;
 import org.junit.After;
 import org.junit.Before;

@@ -2,6 +2,7 @@ package com.ticktockdevelopment.simpleeventstore.Views;
 
 import com.ticktockdevelopment.simpleeventstore.Infrastructure.InMemoryDatabase;
 import com.ticktockdevelopment.simpleeventstore.Messaging.Events.InventoryItemCreated;
+import com.ticktockdevelopment.simpleeventstore.Views.handlers.InventoryItemDetailViewInventoryItemCreatedHandler;
 import junit.framework.Assert;
 import org.junit.After;
 import org.junit.Before;
