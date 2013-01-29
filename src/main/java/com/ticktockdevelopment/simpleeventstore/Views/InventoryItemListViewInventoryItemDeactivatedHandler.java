@@ -15,7 +15,7 @@ import java.util.List;
  * Time: 9:56 PM
  * To change this template use File | Settings | File Templates.
  */
-public class InventoryItemListViewCommandHandler implements IHandler<InventoryItemDeactivated> {
+public class InventoryItemListViewInventoryItemDeactivatedHandler implements IHandler<InventoryItemDeactivated> {
     @Override
     public <Y> boolean CanHandle(Y type) {
         return type instanceof InventoryItemDeactivated;

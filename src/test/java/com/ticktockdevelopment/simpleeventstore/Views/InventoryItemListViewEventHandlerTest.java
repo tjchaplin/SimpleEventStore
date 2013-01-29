@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class InventoryItemListViewEventHandlerTest {
-    private InventoryItemListViewEventHandler inventoryItemListViewEventHandler;
+    private InventoryItemListViewInventoryItemCreatedHandler inventoryItemListViewInventoryItemCreatedHandler;
     private InventoryItemCreated inventoryItemCreated;
     private int testId;
     private String testName;
@@ -17,7 +17,7 @@ public class InventoryItemListViewEventHandlerTest {
     public void setUp() throws Exception {
         testId = 1;
         testName = "testName";
-        inventoryItemListViewEventHandler = new InventoryItemListViewEventHandler();
+        inventoryItemListViewInventoryItemCreatedHandler = new InventoryItemListViewInventoryItemCreatedHandler();
         inventoryItemCreated = new InventoryItemCreated(testId,testName);
     }
 
@@ -28,13 +28,13 @@ public class InventoryItemListViewEventHandlerTest {
 
     @Test
     public void When_Event_Is_Inventory_Item_Created_Should_Return_True() throws Exception {
-        boolean result = inventoryItemListViewEventHandler.CanHandle(inventoryItemCreated);
+        boolean result = inventoryItemListViewInventoryItemCreatedHandler.CanHandle(inventoryItemCreated);
         Assert.assertTrue(result);
     }
 
     @Test
     public void When_Hanlding_Inventory_Item_Created_Should_Add_To_Database() throws Exception {
-        inventoryItemListViewEventHandler.Handle(inventoryItemCreated);
+        inventoryItemListViewInventoryItemCreatedHandler.Handle(inventoryItemCreated);
 
         Assert.assertTrue(InMemoryDatabase.inventoryItemDetails.size() == 1);
     }

@@ -15,7 +15,7 @@ import org.junit.Test;
  * To change this template use File | Settings | File Templates.
  */
 public class InventoryItemDetailViewEventHandlerTest {
-    private InventoryItemDetailViewEventHandler inventoryItemDetailViewEventHandler;
+    private InventoryItemDetailViewInventoryItemCreatedHandler inventoryItemDetailViewInventoryItemCreatedHandler;
     private InventoryItemCreated inventoryItemCreated;
     private int testId;
     private String testName;
@@ -24,7 +24,7 @@ public class InventoryItemDetailViewEventHandlerTest {
     public void setUp() throws Exception {
         testId = 1;
         testName = "testName";
-        inventoryItemDetailViewEventHandler = new InventoryItemDetailViewEventHandler();
+        inventoryItemDetailViewInventoryItemCreatedHandler = new InventoryItemDetailViewInventoryItemCreatedHandler();
         inventoryItemCreated = new InventoryItemCreated(testId,testName);
     }
 
@@ -35,13 +35,13 @@ public class InventoryItemDetailViewEventHandlerTest {
 
     @Test
     public void When_Event_Is_Inventory_Item_Created_Should_Return_True() throws Exception {
-        boolean result = inventoryItemDetailViewEventHandler.CanHandle(inventoryItemCreated);
+        boolean result = inventoryItemDetailViewInventoryItemCreatedHandler.CanHandle(inventoryItemCreated);
         Assert.assertTrue(result);
     }
 
     @Test
     public void When_Hanlding_Inventory_Item_Created_Should_Add_To_Database() throws Exception {
-        inventoryItemDetailViewEventHandler.Handle(inventoryItemCreated);
+        inventoryItemDetailViewInventoryItemCreatedHandler.Handle(inventoryItemCreated);
 
         Assert.assertTrue(InMemoryDatabase.inventoryItemDetails.size() == 1);
     }

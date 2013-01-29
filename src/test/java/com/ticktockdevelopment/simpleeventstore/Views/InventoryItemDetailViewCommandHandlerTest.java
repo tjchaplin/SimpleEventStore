@@ -17,14 +17,14 @@ import org.junit.Test;
  */
 public class InventoryItemDetailViewCommandHandlerTest {
 
-    private InventoryItemDetailViewCommandHandler inventoryItemDetailViewCommandHandler;
+    private InventoryItemDetailViewInventoryItemDeactivatedHandler inventoryItemDetailViewInventoryItemDeactivatedHandler;
     private InventoryItemDeactivated inventoryItemDeactivated;
     private int testId;
 
     @Before
     public void setUp() throws Exception {
         testId = 1;
-        inventoryItemDetailViewCommandHandler = new InventoryItemDetailViewCommandHandler();
+        inventoryItemDetailViewInventoryItemDeactivatedHandler = new InventoryItemDetailViewInventoryItemDeactivatedHandler();
         inventoryItemDeactivated = new InventoryItemDeactivated(testId);
         InMemoryDatabase.inventoryItemDetails.put(String.valueOf(testId),new InventoryItemDetailsDto(1,"TestName",0,0));
     }
@@ -36,13 +36,13 @@ public class InventoryItemDetailViewCommandHandlerTest {
 
     @Test
     public void When_Command_Is_Inventory_Item_Deactivated_Should_Return_True() throws Exception {
-        boolean result = inventoryItemDetailViewCommandHandler.CanHandle(inventoryItemDeactivated);
+        boolean result = inventoryItemDetailViewInventoryItemDeactivatedHandler.CanHandle(inventoryItemDeactivated);
         Assert.assertTrue(result);
     }
 
     @Test
     public void When_Hanlding_Inventory_Item_Deactivated_Should_Remove_To_Database() throws Exception {
-        inventoryItemDetailViewCommandHandler.Handle(inventoryItemDeactivated);
+        inventoryItemDetailViewInventoryItemDeactivatedHandler.Handle(inventoryItemDeactivated);
 
         Assert.assertTrue(InMemoryDatabase.inventoryItemDetails.size() == 0);
     }

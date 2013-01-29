@@ -10,14 +10,14 @@ import org.junit.Test;
 
 public class InventoryItemListViewCommandHandlerTest {
 
-    private InventoryItemListViewCommandHandler inventoryItemListViewCommandHandler;
+    private InventoryItemListViewInventoryItemDeactivatedHandler inventoryItemListViewInventoryItemDeactivatedHandler;
     private InventoryItemDeactivated inventoryItemDeactivated;
     private int testId;
 
     @Before
     public void setUp() throws Exception {
         testId = 1;
-        inventoryItemListViewCommandHandler = new InventoryItemListViewCommandHandler();
+        inventoryItemListViewInventoryItemDeactivatedHandler = new InventoryItemListViewInventoryItemDeactivatedHandler();
         inventoryItemDeactivated = new InventoryItemDeactivated(testId);
         InMemoryDatabase.inventoryItemList.add(new InventoryItemListDto(1,"TestName"));
     }
@@ -29,13 +29,13 @@ public class InventoryItemListViewCommandHandlerTest {
 
     @Test
     public void When_Command_Is_Inventory_Item_Deactivated_Should_Return_True() throws Exception {
-        boolean result = inventoryItemListViewCommandHandler.CanHandle(inventoryItemDeactivated);
+        boolean result = inventoryItemListViewInventoryItemDeactivatedHandler.CanHandle(inventoryItemDeactivated);
         Assert.assertTrue(result);
     }
 
     @Test
     public void When_Hanlding_Inventory_Item_Deactivated_Should_Remove_To_Database() throws Exception {
-        inventoryItemListViewCommandHandler.Handle(inventoryItemDeactivated);
+        inventoryItemListViewInventoryItemDeactivatedHandler.Handle(inventoryItemDeactivated);
 
         Assert.assertTrue(InMemoryDatabase.inventoryItemList.size() == 0);
     }

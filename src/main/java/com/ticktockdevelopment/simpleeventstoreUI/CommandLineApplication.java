@@ -10,6 +10,10 @@ import com.ticktockdevelopment.simpleeventstore.Messaging.CommandHandlers.Create
 import com.ticktockdevelopment.simpleeventstore.Messaging.CommandHandlers.DeactivateInventoryItemCommandHandler;
 import com.ticktockdevelopment.simpleeventstore.Messaging.Commands.CreateInventoryItem;
 import com.ticktockdevelopment.simpleeventstore.Messaging.Commands.DeactivateInventoryItem;
+import com.ticktockdevelopment.simpleeventstore.Views.InventoryItemDetailViewInventoryItemCreatedHandler;
+import com.ticktockdevelopment.simpleeventstore.Views.InventoryItemDetailViewInventoryItemDeactivatedHandler;
+import com.ticktockdevelopment.simpleeventstore.Views.InventoryItemListViewInventoryItemCreatedHandler;
+import com.ticktockdevelopment.simpleeventstore.Views.InventoryItemListViewInventoryItemDeactivatedHandler;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -80,12 +84,15 @@ public class CommandLineApplication {
 
     private static void registerHandlers(Bus bus) {
         IRepository repository = new Repository(eventStore);
+
         bus.RegisterHandler(new CreateInventoryItemCommandHandler(repository));
         bus.RegisterHandler(new DeactivateInventoryItemCommandHandler(repository));
-//        bus.RegisterHandler(new InventoryItemDetailViewCommandHandler());
-//        bus.RegisterHandler(new InventoryItemDetailViewEventHandler());
-//        bus.RegisterHandler(new InventoryItemListViewCommandHandler());
-//        bus.RegisterHandler(new InventoryItemListViewEventHandler());
+
+        bus.RegisterHandler(new InventoryItemDetailViewInventoryItemCreatedHandler());
+        bus.RegisterHandler(new InventoryItemDetailViewInventoryItemDeactivatedHandler());
+
+        bus.RegisterHandler(new InventoryItemListViewInventoryItemCreatedHandler());
+        bus.RegisterHandler(new InventoryItemListViewInventoryItemDeactivatedHandler());
     }
 }
 
