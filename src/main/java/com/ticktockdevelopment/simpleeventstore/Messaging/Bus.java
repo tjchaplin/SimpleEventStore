@@ -8,13 +8,6 @@ import com.ticktockdevelopment.simpleeventstore.Messaging.Events.Event;
 
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA.
- * User: tchaplin
- * Date: 1/25/13
- * Time: 10:44 PM
- * To change this template use File | Settings | File Templates.
- */
 public class Bus implements ICommandSender, IEventPublisher {
     List<IHandler> handlers;
 
