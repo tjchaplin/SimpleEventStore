@@ -6,4 +6,10 @@ public class InventoryItemDeactivated extends Event {
     public InventoryItemDeactivated(int id) {
         Id = id;
     }
+
+
+    @Override
+    public String toString() {
+        return "InventoryItemDeactivated - "+"Id:"+Id+" "+super.toString();
+    }
 }

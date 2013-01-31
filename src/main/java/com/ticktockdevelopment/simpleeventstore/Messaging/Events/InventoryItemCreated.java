@@ -16,6 +16,11 @@ public class InventoryItemCreated extends Event {
         Id = id;
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return "InventoryItemCreated - "+"Id:"+Id+" Name:"+name+" "+super.toString();
+    }
 }
 
 

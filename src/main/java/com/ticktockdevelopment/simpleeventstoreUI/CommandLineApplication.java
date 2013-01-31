@@ -12,6 +12,7 @@ import com.ticktockdevelopment.simpleeventstore.Messaging.CommandHandlers.Create
 import com.ticktockdevelopment.simpleeventstore.Messaging.CommandHandlers.DeactivateInventoryItemCommandHandler;
 import com.ticktockdevelopment.simpleeventstore.Messaging.Commands.CreateInventoryItem;
 import com.ticktockdevelopment.simpleeventstore.Messaging.Commands.DeactivateInventoryItem;
+import com.ticktockdevelopment.simpleeventstore.Messaging.Events.Event;
 import com.ticktockdevelopment.simpleeventstore.Views.InventoryItemDetailView;
 import com.ticktockdevelopment.simpleeventstore.Views.InventoryItemListView;
 import com.ticktockdevelopment.simpleeventstore.Views.handlers.InventoryItemDetailViewInventoryItemCreatedHandler;
@@ -55,6 +56,8 @@ public class CommandLineApplication {
                     listInventoryItem();
                 else if(commands[0].equals("listdetail") && commands.length == 1)
                     listInventoryItemDetail();
+                else if(commands[0].equals("listevents") && commands.length == 1)
+                    listEvents();
                 else if (commands[0].equals("exit"))
                     break;
                 else
@@ -64,6 +67,22 @@ public class CommandLineApplication {
                     outputStreamWriter.write(invalidCommandMessage);
                     outputStreamWriter.flush();
                 }
+            } catch (IOException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
+        }
+    }
+
+    private static void listEvents() {
+        for(int aggregateId = 0; aggregateId < nextId;aggregateId++)
+        {
+            try {
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(System.out));
+                for (Event event : eventStore.GetEventsForAggregate(aggregateId))
+                {
+                    writer.write("AggregateId:"+aggregateId+" Events:"+event.toString()+"\n");
+                }
+                writer.flush();
             } catch (IOException e) {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }

@@ -13,5 +13,9 @@ import com.ticktockdevelopment.simpleeventstore.Messaging.Message;
 public class Event implements Message {
     public int Version;
 
+    @Override
+    public String toString() {
+        return "Event - "+"Version:"+Version;
+    }
 }
 
